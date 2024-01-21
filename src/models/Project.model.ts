@@ -35,6 +35,4 @@ const ProjectModel = ProjectClass.init(
   { tableName: "projects", sequelize }
 );
 
-ProjectModel.sync({ force: true });
-
 export { ProjectModel };

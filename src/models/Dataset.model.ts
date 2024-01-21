@@ -45,6 +45,4 @@ const DatasetModel = DatasetClass.init(
   { tableName: "datasets", sequelize }
 );
 
-DatasetModel.sync({ force: true });
-
 export { DatasetModel };
