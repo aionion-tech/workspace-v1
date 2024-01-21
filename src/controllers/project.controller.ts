@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ProjectModel } from "../models/Project.model";
+import { ProjectUserModel } from "../models/ProjectUser.model";
+import { UserRoles } from "../enums/UserRoles.enum";
 
 export const createProject = async (
   req: Request,
@@ -7,11 +9,20 @@ export const createProject = async (
   next: NextFunction
 ) => {
   try {
+    const { userid } = req.headers;
+
     const { name, workspace } = req.body;
 
     const project = await ProjectModel.create({
       name,
       workspace,
+    });
+
+    await ProjectUserModel.create({
+      workspace,
+      project: project.id,
+      role: UserRoles.OWNER,
+      user: parseInt(userid as string),
     });
 
     res.status(201).json({
