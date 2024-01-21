@@ -10,8 +10,6 @@ export const createWorkspace = async (
     const { userid } = req.headers;
     const { name } = req.body;
 
-    console.log(userid);
-
     const workspace = await WorkspaceModel.create({
       name,
       owner: parseInt(userid as string),
